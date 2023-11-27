@@ -14,7 +14,7 @@ def round_robin(procesos, quantum):
         proceso = cola.popleft()
         tiempo_ejecucion = min(quantum, proceso.tiempo_cpu)
         
-        print(f"Proceso {proceso.nombre} en ejecución durante {tiempo_ejecucion} unidades de tiempo")
+        print(f"Proceso {proceso.nombre} en ejecución durante {tiempo_ejecucion} ms")
 
         proceso.tiempo_cpu -= tiempo_ejecucion
         tiempo_actual += tiempo_ejecucion
@@ -22,15 +22,15 @@ def round_robin(procesos, quantum):
         if proceso.tiempo_cpu > 0:
             cola.append(proceso)
         else:
-            print(f"Proceso {proceso.nombre} terminado en tiempo {tiempo_actual}")
+            print(f"Proceso {proceso.nombre} terminado en tiempo {tiempo_actual} ms")
 
 if __name__ == "__main__":
     proceso1 = Proceso("P1", 0, 10)
-    proceso2 = Proceso("P2", 1, 5)
-    proceso3 = Proceso("P3", 3, 8)
+    proceso2 = Proceso("P2", 2, 5)
+    proceso3 = Proceso("P3", 4, 7)
     
     procesos = [proceso1, proceso2, proceso3]
-    quantum = 2
+    quantum = 4
     
     print("Planificación Round Robin:")
     round_robin(procesos, quantum)
